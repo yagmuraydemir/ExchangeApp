@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyboardAvoidingView, SafeAreaView, StyleSheet, View, Image,Dimensions, Alert, StatusBar, Text } from 'react-native';
+import { KeyboardAvoidingView, SafeAreaView, StyleSheet, View, Image,Dimensions, Alert, StatusBar, Text, TouchableOpacity } from 'react-native';
 import {colors} from '../assets/colors';
 import Input from '../components/Input';
 import {format} from 'date-fns';
@@ -7,7 +7,7 @@ import {MyButton} from '../components/MyButton';
 
 
 
- function App(){ 
+ function App({navigation}){ 
    
   const baseCurrency = 'USD';
   const quoteCurrency = 'GBP';
@@ -25,15 +25,20 @@ import {MyButton} from '../components/MyButton';
        <StatusBar barStyle='light-content' backgroundColor={colors.button}/>
        
      <View style={styles.logoContainer}>
-      <Image style={styles.img} source={require('./assets/logo.png')}/>
+      <Image style={styles.img} source={require('../assets/logo.png')}/>
       </View> 
+      <SafeAreaView>
+      <TouchableOpacity onPress={() => navigation.push('Options')}>
+        <Image style={{ alignItems: 'flex-end', width:35, height:35, flexDirection: 'row-reverse'}} source={require('../assets/export.png')} />
+      </TouchableOpacity>
+      </SafeAreaView>
       <Text style={styles.textHeader}>Currency Converter</Text>
       <View>
       
        <Input
                text="USD"
                value=""
-               onButtonPress={() => alert('you got this!')}
+               onButtonPress={() => navigation.push('Options')}
                keyboardType="numeric"
                onChangeText={(text) => console.log('text', text)}
        ></Input>
@@ -42,7 +47,7 @@ import {MyButton} from '../components/MyButton';
        <Input
                text="GBP"
                value=""
-               onButtonPress={() => alert('you got this!')}
+               onButtonPress={() => navigation.push('Options')}
                keyboardType="numeric"
                onChangeText={(text) => console.log('text', text)}
                editable={false}
